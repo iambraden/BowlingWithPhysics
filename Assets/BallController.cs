@@ -6,6 +6,7 @@ public class BallController : MonoBehaviour
     [SerializeField] private float force = 1f;
     [SerializeField] private InputManager inputManager;
     [SerializeField] private Transform ballAnchor;
+    [SerializeField] private Transform launchIndicator;
 
     private Rigidbody ballRB;
     private bool isBallLaunched;
@@ -33,11 +34,12 @@ public class BallController : MonoBehaviour
         // now your if check can be framed like a sentence
         // if the ball is launched, return and do nothing.
         if (isBallLaunched) return;
-        // now that the ball is not launched, set it to true and launch the ball.
         isBallLaunched = true;
         transform.parent = null;
         ballRB.isKinematic = false;
-        ballRB.AddForce(transform.forward * force, ForceMode.Impulse);
+        ballRB.AddForce(launchIndicator.forward * force, ForceMode.Impulse);
+        launchIndicator.gameObject.SetActive(false);
+        //ballRB.AddForce(transform.forward * force, ForceMode.Impulse);
     }
 
     
